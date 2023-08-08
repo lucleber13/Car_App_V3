@@ -8,96 +8,92 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "used_cars")
-@PrimaryKeyJoinColumn(name = "id")
+@PrimaryKeyJoinColumn(name = "carId")
 public class UsedCar extends Car{
-    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Europe/London")
-    @Temporal(TemporalType.DATE)
-    private Date dateArrived;
-    private boolean isNeededPolishMachine;
-    private boolean isNeededPaintShop;
-    private String valetComments;
-    private String workshopComments;
+    @Column(nullable = false, unique = true)
+    private String regNumber;
+    @Column(nullable = true, unique = true)
+    private String chassisNumber;
+    @Column(nullable = true)
+    private Boolean isNeedsValet;
+    @Column(nullable = true)
+    private Boolean isNeedsService;
+    @Column(nullable = true)
+    private Boolean isNeedsMOT;
+    @Column(nullable = true)
+    private Boolean isNeedsPaint;
+    @Column(nullable = false)
+    private Integer mileage;
 
     public UsedCar() {
-
-    }
-    public UsedCar(long id, String brand, String model, String color, String regNumber, String chassisNumber,
-                   int keysNumber, Date dateArrived, boolean isNeededPolishMachine, boolean isNeededPaintShop,
-                   String valetComments, String workshopComments) {
-        super(id, brand, model, color, regNumber, chassisNumber, keysNumber);
-        this.dateArrived = dateArrived;
-        this.isNeededPolishMachine = isNeededPolishMachine;
-        this.isNeededPaintShop = isNeededPaintShop;
-        this.valetComments = valetComments;
-        this.workshopComments = workshopComments;
     }
 
-    public Date getDateArrived() {
-        return dateArrived;
+    public UsedCar(String brand, String model, String color, Integer keysNumber, String regNumber,
+                   Boolean isStock, Boolean isNeedsValet, Boolean isNeedsService, Boolean isNeedsMOT,
+                   String chassisNumber, Boolean isNeedsPaint, Integer mileage) {
+        super(brand, model, color, keysNumber);
+        this.regNumber = regNumber;
+        this.chassisNumber = chassisNumber;
+        this.isNeedsValet = isNeedsValet;
+        this.isNeedsService = isNeedsService;
+        this.isNeedsMOT = isNeedsMOT;
+        this.isNeedsPaint = isNeedsPaint;
+        this.mileage = mileage;
     }
 
-    public void setDateArrived(Date dateArrived) {
-        this.dateArrived = dateArrived;
+    public String getRegNumber() {
+        return regNumber;
     }
 
-    public boolean isNeededPolishMachine() {
-        return isNeededPolishMachine;
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
     }
 
-    public void setNeededPolishMachine(boolean neededPolishMachine) {
-        isNeededPolishMachine = neededPolishMachine;
+    public String getChassisNumber() {
+        return chassisNumber;
     }
 
-    public boolean isNeededPaintShop() {
-        return isNeededPaintShop;
+    public void setChassisNumber(String chassisNumber) {
+        this.chassisNumber = chassisNumber;
     }
 
-    public void setNeededPaintShop(boolean neededPaintShop) {
-        isNeededPaintShop = neededPaintShop;
+    public Boolean getNeedsValet() {
+        return isNeedsValet;
     }
 
-    public String getValetComments() {
-        return valetComments;
+    public void setNeedsValet(Boolean needsValet) {
+        isNeedsValet = needsValet;
     }
 
-    public void setValetComments(String valetComments) {
-        this.valetComments = valetComments;
+    public Boolean getNeedsService() {
+        return isNeedsService;
     }
 
-    public String getWorkshopComments() {
-        return workshopComments;
+    public void setNeedsService(Boolean needsService) {
+        isNeedsService = needsService;
     }
 
-    public void setWorkshopComments(String workshopComments) {
-        this.workshopComments = workshopComments;
+    public Boolean getNeedsMOT() {
+        return isNeedsMOT;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UsedCar usedCar)) return false;
-        if (!super.equals(o)) return false;
-        return isNeededPolishMachine() == usedCar.isNeededPolishMachine()
-                && isNeededPaintShop() == usedCar.isNeededPaintShop()
-                && Objects.equals(getDateArrived(), usedCar.getDateArrived())
-                && Objects.equals(getValetComments(), usedCar.getValetComments())
-                && Objects.equals(getWorkshopComments(), usedCar.getWorkshopComments());
+    public void setNeedsMOT(Boolean needsMOT) {
+        isNeedsMOT = needsMOT;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getDateArrived(), isNeededPolishMachine(), isNeededPaintShop(),
-                getValetComments(), getWorkshopComments());
+    public Boolean getNeedsPaint() {
+        return isNeedsPaint;
     }
 
-    @Override
-    public String toString() {
-        return "UsedCar{" +
-                "dateArrived=" + dateArrived +
-                ", isNeededPolishMachine=" + isNeededPolishMachine +
-                ", isNeededPaintShop=" + isNeededPaintShop +
-                ", valetComments='" + valetComments + '\'' +
-                ", workshopComments='" + workshopComments + '\'' +
-                '}';
+    public void setNeedsPaint(Boolean needsPaint) {
+        isNeedsPaint = needsPaint;
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
     }
 }
