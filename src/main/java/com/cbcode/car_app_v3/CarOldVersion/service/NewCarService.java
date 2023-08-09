@@ -1,6 +1,6 @@
-package com.cbcode.car_app_v3.Car.service;
+package com.cbcode.car_app_v3.CarOldVersion.service;
 
-import com.cbcode.car_app_v3.Car.Model.NewCar;
+import com.cbcode.car_app_v3.CarOldVersion.Model.NewCar;
 
 import java.util.List;
 

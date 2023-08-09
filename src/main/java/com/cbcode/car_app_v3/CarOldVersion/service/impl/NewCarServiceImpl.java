@@ -1,8 +1,8 @@
-package com.cbcode.car_app_v3.Car.service.impl;
+package com.cbcode.car_app_v3.CarOldVersion.service.impl;
 
-import com.cbcode.car_app_v3.Car.Model.NewCar;
-import com.cbcode.car_app_v3.Car.Repository.NewCarRepository;
-import com.cbcode.car_app_v3.Car.service.NewCarService;
+import com.cbcode.car_app_v3.CarOldVersion.Model.NewCar;
+import com.cbcode.car_app_v3.CarOldVersion.Repository.NewCarRepository;
+import com.cbcode.car_app_v3.CarOldVersion.service.NewCarService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

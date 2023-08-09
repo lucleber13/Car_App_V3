@@ -1,14 +1,11 @@
-package com.cbcode.car_app_v3.Car.Model;
+package com.cbcode.car_app_v3.CarOldVersion.Model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.Objects;
-
 @Entity
-@Table(name = "used_cars")
-@PrimaryKeyJoinColumn(name = "carId")
+@DiscriminatorValue("USED")
+//@Table(name = "used_cars")
+//@PrimaryKeyJoinColumn(name = "carId")
 public class UsedCar extends Car{
     @Column(nullable = false, unique = true)
     private String regNumber;

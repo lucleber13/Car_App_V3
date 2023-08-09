@@ -1,13 +1,14 @@
-package com.cbcode.car_app_v3.Car.Model;
+package com.cbcode.car_app_v3.CarOldVersion.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "car_type", discriminatorType = DiscriminatorType.STRING)
 @SequenceGenerator(name = "car_seq", sequenceName = "car_seq", initialValue = 1, allocationSize = 1)
 public abstract class Car {
     @Id

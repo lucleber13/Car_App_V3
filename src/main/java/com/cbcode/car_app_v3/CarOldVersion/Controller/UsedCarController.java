@@ -1,7 +1,7 @@
-package com.cbcode.car_app_v3.Car.Controller;
+package com.cbcode.car_app_v3.CarOldVersion.Controller;
 
-import com.cbcode.car_app_v3.Car.Model.UsedCar;
-import com.cbcode.car_app_v3.Car.service.UsedCarService;
+import com.cbcode.car_app_v3.CarOldVersion.Model.UsedCar;
+import com.cbcode.car_app_v3.CarOldVersion.service.UsedCarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

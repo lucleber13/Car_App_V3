@@ -1,8 +1,8 @@
-package com.cbcode.car_app_v3.Car.service.impl;
+package com.cbcode.car_app_v3.CarOldVersion.service.impl;
 
-import com.cbcode.car_app_v3.Car.Model.UsedCar;
-import com.cbcode.car_app_v3.Car.Repository.UsedCarRepository;
-import com.cbcode.car_app_v3.Car.service.UsedCarService;
+import com.cbcode.car_app_v3.CarOldVersion.Model.UsedCar;
+import com.cbcode.car_app_v3.CarOldVersion.Repository.UsedCarRepository;
+import com.cbcode.car_app_v3.CarOldVersion.service.UsedCarService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -21,9 +21,9 @@ public class UsedCarServiceImpl implements UsedCarService {
 
     @Override
     public void addUsedCar(UsedCar usedCar) {
-        Optional<UsedCar> usedCarOptional = usedCarRepository.findUsedCarByRegNumber(usedCar.getRegNumber());
+        Optional<UsedCar> usedCarOptional = usedCarRepository.findUsedCarByChassisNumberOrRegNumber(usedCar.getChassisNumber(),usedCar.getRegNumber());
         if (usedCarOptional.isPresent()) {
-            throw new IllegalStateException("Registration number already exists");
+            throw new IllegalStateException("CarOldVersion already exists in the database");
         }
         UsedCar usedCar1 = new UsedCar();
         usedCar1.setRegNumber(usedCar.getRegNumber());

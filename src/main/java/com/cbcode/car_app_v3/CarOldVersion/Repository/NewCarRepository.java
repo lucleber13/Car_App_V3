@@ -1,6 +1,6 @@
-package com.cbcode.car_app_v3.Car.Repository;
+package com.cbcode.car_app_v3.CarOldVersion.Repository;
 
-import com.cbcode.car_app_v3.Car.Model.NewCar;
+import com.cbcode.car_app_v3.CarOldVersion.Model.NewCar;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
