@@ -1,6 +1,6 @@
 package com.cbcode.car_app_v3.Cars.controller;
 
-import com.cbcode.car_app_v3.Cars.model.Cars;
+import com.cbcode.car_app_v3.Cars.model.Car;
 import com.cbcode.car_app_v3.Cars.model.DTO.NewCarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.UsedCarDto;
 import com.cbcode.car_app_v3.Cars.service.CarsService;
@@ -23,55 +23,60 @@ public class CarsController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Cars> createNewCar(@RequestBody NewCarDto newCarDto) {
-        Cars newCar = modelMapper.map(newCarDto, Cars.class);
+    public ResponseEntity<Car> createNewCar(@RequestBody NewCarDto newCarDto) {
+        Car newCar = modelMapper.map(newCarDto, Car.class);
         return ResponseEntity.ok(carsService.createCar(newCar));
     }
 
     @PostMapping("/used")
-    public ResponseEntity<Cars> createUsedCar(@RequestBody UsedCarDto usedCarDto) {
-        Cars newCar = modelMapper.map(usedCarDto, Cars.class);
+    public ResponseEntity<Car> createUsedCar(@RequestBody UsedCarDto usedCarDto) {
+        Car newCar = modelMapper.map(usedCarDto, Car.class);
         return ResponseEntity.ok(carsService.createCar(newCar));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cars> getCarById(@PathVariable Long id) {
+    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
         return ResponseEntity.ok(carsService.getCarById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Cars>> getAllCars() {
+    public ResponseEntity<List<Car>> getAllCars() {
         return ResponseEntity.ok(carsService.getAllCars());
     }
 
-    @PutMapping("/update/used")
-    public ResponseEntity<Cars> updateUsedCar(@RequestBody UsedCarDto usedCarDto) {
-        return ResponseEntity.ok(carsService.updateUsedCar( usedCarDto));
+    @PutMapping("/update/used/{carId}")
+    public ResponseEntity<Car> updateUsedCar(@PathVariable Long carId, @RequestBody UsedCarDto usedCarDto) {
+        return ResponseEntity.ok(carsService.updateUsedCar(carId, usedCarDto));
     }
 
     @PutMapping("/update/new/{carId}")
-    public ResponseEntity<Cars> updateNewCar(@PathVariable Long carId, @RequestBody NewCarDto newCarDto) {
+    public ResponseEntity<Car> updateNewCar(@PathVariable Long carId, @RequestBody NewCarDto newCarDto) {
         return ResponseEntity.ok(carsService.updateNewCar(carId, newCarDto));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCar(@PathVariable("id") Long id) {
         carsService.deleteCar(id);
-        return ResponseEntity.ok("Car deleted successfully");
+        return ResponseEntity.ok("CarInfo deleted successfully");
     }
 
     @GetMapping("/chassis/{chassisNumber}")
-    public ResponseEntity<Cars> getCarByChassisNumber(@PathVariable String chassisNumber) {
+    public ResponseEntity<Car> getCarByChassisNumber(@PathVariable String chassisNumber) {
         return ResponseEntity.ok(carsService.getCarByChassisNumber(chassisNumber));
     }
 
     @GetMapping("/reg/{regNumber}")
-    public ResponseEntity<Cars> getCarByRegNumber(@PathVariable String regNumber) {
+    public ResponseEntity<Car> getCarByRegNumber(@PathVariable String regNumber) {
         return ResponseEntity.ok(carsService.getCarByRegNumber(regNumber));
     }
 
     @GetMapping("/customer/{customerName}")
-    public ResponseEntity<List<Cars>> getCarByCustomerName(@PathVariable String customerName) {
+    public ResponseEntity<List<Car>> getCarByCustomerName(@PathVariable String customerName) {
         return ResponseEntity.ok(carsService.getCarByCustomerName(customerName));
+    }
+
+    @GetMapping("/model/{model}")
+    public ResponseEntity<List<Car>> getCarByModel(@PathVariable String model) {
+        return ResponseEntity.ok(carsService.getCarByModel(model));
     }
 }

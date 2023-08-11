@@ -1,6 +1,7 @@
 package com.cbcode.car_app_v3.Cars.model;
 
 import com.cbcode.car_app_v3.Cars.model.Enums.ConditionType;
+import com.cbcode.car_app_v3.Cars.model.Enums.SoldOrStock;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -10,13 +11,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "cars")
 @SequenceGenerator(name = "seq_cars", initialValue = 1, allocationSize = 1, sequenceName = "seq_cars")
-public class Cars {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cars")
     private Long carId;
-    @Column(nullable = false)
-    private String brand;
     @Column(nullable = false)
     private String model;
     @Column(nullable = false)
@@ -31,16 +30,7 @@ public class Cars {
     private Integer keysNumber;
     @Column(nullable = true)
     private Integer mileage;
-    @Column(nullable = true)
-    private Boolean isSold;
-    @Column(nullable = true)
-    private Boolean isNeedPainting;
-    @Column(nullable = true)
-    private Boolean isNeedService;
-    @Column(nullable = true)
-    private Boolean isNeedCleaning;
-    @Column(nullable = true)
-    private Boolean isNeedMot;
+    private Boolean isSold = false;
     @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Europe/London")
     @Temporal(TemporalType.DATE)
@@ -53,13 +43,11 @@ public class Cars {
     @Enumerated(EnumType.STRING)
     private ConditionType conditionType;
 
-    public Cars() {
+    public Car() {
     }
 
-    public Cars(String brand, String model, String color, String customerName, String regNumber, String chassisNumber,
-                Integer keysNumber, Integer mileage, Boolean isSold, Boolean isNeedPainting, Boolean isNeedService,
-                Boolean isNeedCleaning, Boolean isNeedMot, Date dateArrived, Date dateRequired, ConditionType conditionType) {
-        this.brand = brand;
+    public Car(String model, String color, String customerName, String regNumber, String chassisNumber, Boolean isSold,
+               Integer keysNumber, Integer mileage, Date dateArrived, Date dateRequired, ConditionType conditionType) {
         this.model = model;
         this.color = color;
         this.customerName = customerName;
@@ -68,13 +56,12 @@ public class Cars {
         this.keysNumber = keysNumber;
         this.mileage = mileage;
         this.isSold = isSold;
-        this.isNeedPainting = isNeedPainting;
-        this.isNeedService = isNeedService;
-        this.isNeedCleaning = isNeedCleaning;
-        this.isNeedMot = isNeedMot;
         this.dateArrived = dateArrived;
         this.dateRequired = dateRequired;
         this.conditionType = conditionType;
+    }
+    public static CarBuilder builder() {
+        return new CarBuilder();
     }
 
     public Long getCarId() {
@@ -83,14 +70,6 @@ public class Cars {
 
     public void setCarId(Long carId) {
         this.carId = carId;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getModel() {
@@ -149,44 +128,12 @@ public class Cars {
         this.mileage = mileage;
     }
 
-    public Boolean getSold() {
+    public Boolean getIsSold() {
         return isSold;
     }
 
-    public void setSold(Boolean sold) {
-        this.isSold = sold;
-    }
-
-    public Boolean getNeedPainting() {
-        return isNeedPainting;
-    }
-
-    public void setNeedPainting(Boolean needPainting) {
-        isNeedPainting = needPainting;
-    }
-
-    public Boolean getNeedService() {
-        return isNeedService;
-    }
-
-    public void setNeedService(Boolean needService) {
-        isNeedService = needService;
-    }
-
-    public Boolean getNeedCleaning() {
-        return isNeedCleaning;
-    }
-
-    public void setNeedCleaning(Boolean needCleaning) {
-        isNeedCleaning = needCleaning;
-    }
-
-    public Boolean getNeedMot() {
-        return isNeedMot;
-    }
-
-    public void setNeedMot(Boolean needMot) {
-        isNeedMot = needMot;
+    public void setIsSold(Boolean isSold) {
+        this.isSold = isSold;
     }
 
     public Date getDateArrived() {
@@ -214,37 +161,31 @@ public class Cars {
     }
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Cars cars)) return false;
-        return Objects.equals(getCarId(), cars.getCarId())
-                && Objects.equals(getBrand(), cars.getBrand())
-                && Objects.equals(getModel(), cars.getModel())
-                && Objects.equals(getColor(), cars.getColor())
-                && Objects.equals(getCustomerName(), cars.getCustomerName())
-                && Objects.equals(getRegNumber(), cars.getRegNumber())
-                && Objects.equals(getChassisNumber(), cars.getChassisNumber())
-                && Objects.equals(getKeysNumber(), cars.getKeysNumber())
-                && Objects.equals(getMileage(), cars.getMileage())
-                && Objects.equals(isSold, cars.isSold)
-                && Objects.equals(isNeedPainting, cars.isNeedPainting)
-                && Objects.equals(isNeedService, cars.isNeedService)
-                && Objects.equals(isNeedCleaning, cars.isNeedCleaning)
-                && Objects.equals(isNeedMot, cars.isNeedMot)
-                && Objects.equals(getDateArrived(), cars.getDateArrived())
-                && Objects.equals(getDateRequired(), cars.getDateRequired())
-                && getConditionType() == cars.getConditionType();
+        if (!(o instanceof Car car)) return false;
+        return Objects.equals(getCarId(), car.getCarId())
+                && Objects.equals(getModel(), car.getModel())
+                && Objects.equals(getColor(), car.getColor())
+                && Objects.equals(getCustomerName(), car.getCustomerName())
+                && Objects.equals(getRegNumber(), car.getRegNumber())
+                && Objects.equals(getChassisNumber(), car.getChassisNumber())
+                && Objects.equals(getKeysNumber(), car.getKeysNumber())
+                && Objects.equals(getMileage(), car.getMileage())
+                && Objects.equals(getIsSold(), car.getIsSold())
+                && Objects.equals(getDateArrived(), car.getDateArrived())
+                && Objects.equals(getDateRequired(), car.getDateRequired())
+                && getConditionType() == car.getConditionType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCarId(), getBrand(), getModel(), getColor(), getCustomerName(), getRegNumber(), getChassisNumber(), getKeysNumber(),
-                getMileage(), isSold, isNeedPainting, isNeedService, isNeedCleaning, isNeedMot, getDateArrived(), getDateRequired(), getConditionType());
+        return Objects.hash(getCarId(), getModel(), getColor(), getCustomerName(), getRegNumber(), getChassisNumber(), getKeysNumber(),
+                getMileage(), getDateArrived(), getDateRequired(), getConditionType(), getIsSold());
     }
 
     @Override
     public String toString() {
-        return "Cars{" +
+        return "Car{" +
                 "carId=" + carId +
-                ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
                 ", customerName='" + customerName + '\'' +
@@ -253,10 +194,6 @@ public class Cars {
                 ", keysNumber=" + keysNumber +
                 ", mileage=" + mileage +
                 ", isSold=" + isSold +
-                ", isNeedPainting=" + isNeedPainting +
-                ", isNeedService=" + isNeedService +
-                ", isNeedCleaning=" + isNeedCleaning +
-                ", isNeedMot=" + isNeedMot +
                 ", dateArrived=" + dateArrived +
                 ", dateRequired=" + dateRequired +
                 ", conditionType=" + conditionType +

@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class NewCarDto {
     private Long id;
-    private String brand;
     private String model;
     private String color;
     private String regNumber = null;
@@ -26,9 +25,8 @@ public class NewCarDto {
     public NewCarDto() {
     }
 
-    public NewCarDto(String brand, String model, String color, Integer keysNumber, String chassisNumber,
+    public NewCarDto(String model, String color, Integer keysNumber, String chassisNumber,
                      Date dateArrived, String customerName, ConditionType conditionType, String regNumber) {
-        this.brand = brand;
         this.model = model;
         this.color = color;
         this.keysNumber = keysNumber;
@@ -45,14 +43,6 @@ public class NewCarDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getModel() {
@@ -116,7 +106,7 @@ public class NewCarDto {
     }
 
     public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
+        this.regNumber = regNumber.toUpperCase();
     }
 
     @Override
@@ -124,7 +114,6 @@ public class NewCarDto {
         if (this == o) return true;
         if (!(o instanceof NewCarDto newCarDto)) return false;
         return Objects.equals(getId(), newCarDto.getId())
-                && Objects.equals(getBrand(), newCarDto.getBrand())
                 && Objects.equals(getModel(), newCarDto.getModel())
                 && Objects.equals(getColor(), newCarDto.getColor())
                 && Objects.equals(getKeysNumber(), newCarDto.getKeysNumber())
@@ -137,7 +126,7 @@ public class NewCarDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBrand(), getModel(), getColor(), getKeysNumber(), getChassisNumber(),
+        return Objects.hash(getId(), getModel(), getColor(), getKeysNumber(), getChassisNumber(),
                 getDateArrived(), getCustomerName(), getConditionType(), getRegNumber());
     }
 
@@ -145,7 +134,6 @@ public class NewCarDto {
     public String toString() {
         return "NewCarDto{" +
                 "id=" + id +
-                ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
                 ", keysNumber=" + keysNumber +
