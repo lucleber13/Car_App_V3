@@ -1,6 +1,7 @@
 package com.cbcode.car_app_v3.Cars.controller;
 
 import com.cbcode.car_app_v3.Cars.model.Car;
+import com.cbcode.car_app_v3.Cars.model.DTO.CarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.NewCarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.UsedCarDto;
 import com.cbcode.car_app_v3.Cars.service.CarsService;
@@ -23,15 +24,15 @@ public class CarsController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Car> createNewCar(@RequestBody NewCarDto newCarDto) {
+    public void createNewCar(@RequestBody NewCarDto newCarDto) {
         Car newCar = modelMapper.map(newCarDto, Car.class);
-        return ResponseEntity.ok(carsService.createCar(newCar));
+        carsService.createCar(newCar);
     }
 
     @PostMapping("/used")
-    public ResponseEntity<Car> createUsedCar(@RequestBody UsedCarDto usedCarDto) {
+    public void createUsedCar(@RequestBody UsedCarDto usedCarDto) {
         Car newCar = modelMapper.map(usedCarDto, Car.class);
-        return ResponseEntity.ok(carsService.createCar(newCar));
+        carsService.createCar(newCar);
     }
 
     @GetMapping("/{id}")

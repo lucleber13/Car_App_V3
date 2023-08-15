@@ -1,6 +1,7 @@
 package com.cbcode.car_app_v3.Cars.service.impl;
 
 import com.cbcode.car_app_v3.Cars.model.Car;
+import com.cbcode.car_app_v3.Cars.model.DTO.CarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.NewCarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.UsedCarDto;
 import com.cbcode.car_app_v3.Cars.model.Enums.ConditionType;
@@ -25,12 +26,7 @@ public class CarsServiceImpl implements CarsService {
 
 
     @Override
-    public Car createCar(Car car) {
-        checkCarStatus(car);
-        return car;
-    }
-
-    private Car checkCarStatus(Car car) {
+    public void createCar(Car car) {
         Optional<Car> carsOptional = carsRepository.findCarByChassisNumber(car.getChassisNumber());
         Optional<Car> carsOptional1 = carsRepository.findCarByRegNumber(car.getRegNumber());
         if (carsOptional.isPresent() || carsOptional1.isPresent()) {
@@ -38,16 +34,13 @@ public class CarsServiceImpl implements CarsService {
         }
         if (car.getConditionType() == ConditionType.NEW) {
             NewCarDto newCarDto = modelMapper.map(car, NewCarDto.class);
-            //newCarDto.setConditionType(ConditionType.NEW);
-            return carsRepository.save(modelMapper.map(newCarDto, Car.class));
+            carsRepository.save(modelMapper.map(newCarDto, Car.class));
         } else if (car.getConditionType() == ConditionType.USED) {
             UsedCarDto usedCarDto = modelMapper.map(car, UsedCarDto.class);
-            //usedCarDto.setConditionType(ConditionType.USED);
-            return carsRepository.save(modelMapper.map(usedCarDto, Car.class));
+            carsRepository.save(modelMapper.map(usedCarDto, Car.class));
         } else {
             throw new IllegalArgumentException("Invalid condition type");
         }
-
     }
 
     @Override

@@ -1,13 +1,14 @@
 package com.cbcode.car_app_v3.Cars.service;
 
 import com.cbcode.car_app_v3.Cars.model.Car;
+import com.cbcode.car_app_v3.Cars.model.DTO.CarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.NewCarDto;
 import com.cbcode.car_app_v3.Cars.model.DTO.UsedCarDto;
 
 import java.util.List;
 
 public interface CarsService {
-    Car createCar(Car car);
+    void createCar(Car car);
     Car getCarById(Long id);
     List<Car> getAllCars();
     Car updateCar(Long carId, Car car);
